@@ -2,7 +2,7 @@
   "catalog": [
     {
       "id": 1,
-      "imageURL": "http://placehold.it/150/1b21a0/ffffff",
+      "imageURL": "http://placehold.it/150/d0f5a9/ffffff",
       "name": "product A",
       "type": "",
       "price": 250,
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "imageURL": "http://placehold.it/150/bc4125/ffffff",
+      "imageURL": "http://placehold.it/150/acfa58/ffffff",
       "name": "product B",
       "type": "",
       "price": 350,
@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "imageURL": "http://placehold.it/150/ebf742/ffffff",
+      "imageURL": "http://placehold.it/150/4b8a08/ffffff",
       "name": "product D",
       "type": "",
       "price": 500,
@@ -34,7 +34,7 @@
     },
     {
       "id": 5,
-      "imageURL": "http://placehold.it/150/d121c8/ffffff",
+      "imageURL": "http://placehold.it/150/0b610b/ffffff",
       "name": "product D",
       "type": "",
       "price": 100,

@@ -1,1 +1,17 @@
 /* you can add any styles you think could improve user's experience */
+.catalog{
+  display: inline-block;
+  margin: 1vh;
+  border: 0.1vh solid greenyellow;
+  padding: 1vh;
+}
+.catalog:hover{
+  padding: 1vh 2vh;
+}
+.sendToCart{
+  cursor: pointer;
+}
+
+.jojo{
+  display: none;
+}
