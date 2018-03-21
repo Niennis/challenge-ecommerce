@@ -1,12 +1,13 @@
 /* you can add any styles you think could improve user's experience */
-.catalog{
+.catalog, .productAdded{
   display: inline-block;
   margin: 1vh;
   border: 0.1vh solid greenyellow;
   padding: 1vh;
+  border-radius: 0.5vh;
 }
 .catalog:hover{
-  padding: 1vh 2vh;
+  background-color: rgb(223, 253, 170);
 }
 .sendToCart{
   cursor: pointer;

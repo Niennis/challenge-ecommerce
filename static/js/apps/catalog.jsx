@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Product from './product';
 import Cart from './cart';
-import { catalog } from './../../../data/mock.json'
+import { catalog } from './../../../data/mock.json';
 
 // import catalog from './../../../data/mock.json'
 
@@ -12,32 +12,21 @@ class Catalog extends Component {
     this.state = {
       productData: null,
       thisProduct: null,
+      total: 0,
     }
   }
 
   componentWillMount() {
     fetch('http://localhost:1337/items').then(data => (data.json())).then(response => {
-      console.log(response);
+      // console.log(response);
       const productData = response.catalog;
-      console.log(productData);
+      // console.log(productData);
     this.setState({productData});
     })
     .catch(error => {
       console.log(error)
     })
   };
-
-  addToChart(event) {
-    // const { thisProduct } = this.state;
-    const productPos = (event.target.name) - 1 ;
-    // this.setState({thisProduct : thisProduct})
-    console.log(productPos)
-    // style.display = 'none';
-    const thisProduct = this.state.productData[productPos];
-    const newID = thisProduct.id * 100;
-    console.log(thisProduct)
-    this.setState({thisProduct});
-  }
 
   renderProductsList(productData) {
     return productData.map(products => (
@@ -48,16 +37,37 @@ class Catalog extends Component {
       </div>
     ))}
 
-  renderCart() {
+  addToChart(event) {
+    // const { thisProduct } = this.state;
+    const productPos = (event.target.name) - 1 ;
+    // this.setState({thisProduct : thisProduct})
+    // console.log(productPos)
+    // style.display = 'none';
+    const product = this.state.productData[productPos];
+    const newID = product.id * 100;
+    // console.log(product)
+    this.setState({thisProduct: product,
+    total : this.state.total + product.price});
+  }
+
+  renderCart(thisProduct) {
     return (
-      <Cart>
-        <div className="productAdded" key={newID}>
-          <Product imageURL={thisProduct.imageURL} name={thisProduct.name} currency={thisProduct.currency} price={thisProduct.price}>                    
+        <div className="productAdded" name={(thisProduct.id)*100} key={(thisProduct.id)*100}>
+          <Product imageURL={thisProduct.imageURL} name={thisProduct.name} currency={thisProduct.currency} price={thisProduct.price}> 
           </Product>
-          <button className="sendToCart" >Add to cart</button>
-        </div>      
-      </Cart>
+          <button className="remove" name={(thisProduct.id)*100} onClick={this.removeFromCart.bind(this)}>Remove from cart</button>
+        </div>  
     )
+  }
+
+  removeFromCart(event) {
+    const removeProd = (event.target.name);
+    console.log(removeProd);
+    const toRemove = document.getElementsByName(removeProd);
+    const container = document.getElementsByClassName('cartAndListCont');
+    container[0].removeChild(toRemove[0]);
+    const productRemove = this.state.thisProduct;
+    this.setState({total: this.state.total - productRemove.price});
   }
 
   renderProgress() {
@@ -68,14 +78,22 @@ class Catalog extends Component {
     return (<h3> No hay productos en el carro. </h3>)
   }
 
+
+
   render() {
     const {productData} = this.state;
     const {thisProduct} = this.state;
+    const {total} = this.state;
     return (
       <div>
-        {/* {this.showProducts()} */}
-        {thisProduct !== null ? this.renderCart(productData) : this.renderCartState()}        
-        {productData !== null ? this.renderProductsList(productData) : this.renderProgress()}
+        <div className="cartAndListCont">
+          <div className="totalPrice">{total}</div>
+          {/* <Cart product = {thisProduct} ></Cart> */}
+          {thisProduct !== null ? this.renderCart(thisProduct) : this.renderCartState()}   
+        </div>
+        <div>   
+          {productData !== null ? this.renderProductsList(productData) : this.renderProgress()}
+        </div>
       </div>
     );
   }
